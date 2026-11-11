@@ -1,0 +1,47 @@
+# Local IDE and build output
+.gradle/
+.kotlin/
+.idea/
+**/build/
+*.iml
+local.properties
+*.log
+
+# Credentials and signing keys
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+keystore.properties
+
+# Machine-specific helpers and private documents
+*.docx
+*.pdf
+*.apk
+!apk/*_release.apk
+*.aab
+Thumbs.db
+.DS_Store
+signing/
+*.p12
+*.pem
+__pycache__/
+*.py[cod]
+.pytest_cache/
+familycare.local.json
+dist/
+
+kakao.local.json
+tmap.local.json
+
+# Official TMAP SDK is installed locally by Setup-TmapSdk.ps1
+android/local-sdk/
+
+# Any other machine-specific settings file (examples stay tracked)
+*.local.json
+!*.local.example.json
+
+# Older submission APKs moved aside by 08_BuildReleaseApk.cmd
+apk/old/
+android/pleos-stt.local.properties

@@ -1,0 +1,6 @@
+{
+  "app_key": "",
+  "enabled": true,
+  "max_requests_per_day": 500,
+  "map_sdk_enabled": false
+}

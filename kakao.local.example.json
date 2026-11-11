@@ -1,0 +1,6 @@
+{
+  "rest_api_key": "",
+  "mobility_rest_api_key": "",
+  "enabled": true,
+  "max_requests_per_day": 500
+}

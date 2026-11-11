@@ -1,0 +1,43 @@
+Local route intent understanding · 0.20.6 (spoken destinations added in 0.20.7)
+
+Speech: Pleos SpeechToText 3.3.1, Korean HYBRID when an owner-supplied Client ID/Secret is configured; otherwise ON_DEVICE.
+Meaning: multilingual E5 small, quantized ONNX, CPU on the paired notebook.
+HYBRID sends microphone audio to Pleos Speech only during the user-triggered “말하기” capture. If registration or recognition fails, the app restarts capture with the local engine. The app does not save audio recordings. The recognized text crosses the existing vehicle-to-notebook connection for in-memory route intent processing.
+The Pleos client secret is supplied from android/pleos-stt.local.properties at build time. Android apps cannot keep a client secret confidential once built; share configured APKs only with trusted testers and do not publish them.
+
+This is a bounded sentence-intent classifier, not a general conversation model.
+It identifies a stop/pickup request; deterministic validation resolves existing place requests.
+Neither the model nor a spoken string can provide new coordinates or vehicle-control permissions.
+Ambiguous places require a numbered/name follow-up. Low confidence, negation, queries,
+expired requests and changed routes do not execute. Each voice interaction is button-triggered.
+The remaining original destination is kept. The current router supports one pending via point.
+
+0.20.7 spoken destinations ("강남역으로 안내해 줘", "가까운 주유소 찾아 줘", "집으로 가자"):
+the car app recognizes these with fixed Korean phrase rules (VoiceDestination.kt), not the model.
+The place words go to the existing TMAP place search through the notebook; coordinates always come
+from TMAP results or the driver's saved home/work. One exact name match is guided directly; otherwise
+the driver picks one of up to three results by number or name (or a tap while parked) within 60 s.
+Sentences about family proposals, stops or pickups, negations, questions and several actions in one
+sentence are left to the stop/pickup interpreter above or ignored.
+
+No external inference API, key or per-call AI billing is used by the laptop intent model. Downloading the model requires internet; live TMAP routing retains its existing internet and account quota requirements. Pleos Speech service usage is subject to Pleos account/service terms.
+Test artifacts contain generated test sentences only.
+
+Install: scripts/windows/Setup-VoiceUnderstanding.ps1 (Python 3.11–3.13).
+Models, Python environment and prototype sentence vectors stay under ignored dist/voice-runtime.
+Every normal relay startup uses that runtime automatically; there is no extra network service.
+The model is not bundled into a phone or car APK. A different laptop needs the installer once.
+
+Official alternative: Pleos Gleo Interface defines LLM function calls for app integration.
+Its published process includes schema registration/review; this build does not claim Gleo approval.
+https://document.pleos.ai/docs/pleos-only/app-integration-guide/guide/core-concepts
+https://document.pleos.ai/docs/pleos-only/app-integration-guide/guide/deliver-schema
+SpeechToText server registration and mode:
+https://document.pleos.ai/docs/pleos-only/connect-sdk-pleos/SpeechToText/app-registration
+https://document.pleos.ai/docs/pleos-only/connect-sdk-pleos/SpeechToText/intro
+
+Model: https://huggingface.co/intfloat/multilingual-e5-small (MIT)
+ONNX conversion: https://huggingface.co/Xenova/multilingual-e5-small
+Pinned revision: 761b726dd34fb83930e26aab4e9ac3899aa1fa78
+Weight SHA256: f80102d3f2a1229f387d3c81909990d8945513e347b0eab049f7de3c6f98c193
+Tokenizer SHA256: 0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39

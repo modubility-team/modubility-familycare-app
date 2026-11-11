@@ -1,0 +1,14 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const code=fs.readFileSync(__dirname+'/live_demo.js','utf8');
+const nodes={};const node=id=>nodes[id]??(nodes[id]={removeAttribute(n){delete this[n]}});
+node('familyLink').href='http://192.168.0.2:8765/join#local';
+const c={$:node,state:{},Date,JSON,Error,post:async()=>{throw Error('설치 상태 확인')},refresh:async()=>{}};vm.createContext(c);
+vm.runInContext(code.slice(code.indexOf('let externalWorking=')),c);
+let state={connected:true,sharing:true,externalConnection:{state:'ready',active:true,url:'https://a-b.trycloudflare.com',message:'준비 완료'},externalLinks:{family:'https://a-b.trycloudflare.com/join#token'}};
+c.state=state;c.renderExternal(state);
+assert.equal(node('externalQrs').hidden,false);assert.equal(node('externalStart').disabled,true);assert.equal(node('externalStop').disabled,false);
+assert.equal(node('familyLink').href,'http://192.168.0.2:8765/join#local');
+c.renderExternal({connected:true,sharing:true,externalConnection:{state:'off',active:false}});
+assert.equal(node('externalQrs').hidden,true);assert.equal(node('externalFamilyLink').href,undefined);assert.equal(node('externalStart').disabled,false);
+c.renderExternal({});assert.equal(node('externalStart').disabled,true);
+(async()=>{await c.changeExternal('start');assert.equal(node('externalStatus').textContent,'설치 상태 확인');console.log('PASS: separate LAN QR, public QR clearing, button states, error feedback')})();

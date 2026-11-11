@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#ffffff"><title>WithME · 케어 웹</title><link rel="stylesheet" href="/style.css"><script defer src="/app.js"></script><script defer src="/launch-native.js"></script></head>
+<body data-view="home">
+<!-- Original line icons, drawn for WithME. -->
+<svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<symbol id="i-car" viewBox="0 0 24 24"><path d="m4 10 2-6h12l2 6M3 10h18v8H3zM6 18v3m12-3v3M6 14h2m8 0h2M8 7h8"/></symbol>
+<symbol id="i-cool" viewBox="0 0 24 24"><path d="M12 2v20M3.3 7l17.4 10M3.3 17 20.7 7M9 4l3 3 3-3M9 20l3-3 3 3M4 10l4-1-1-4m10 14-1-4 4-1M4 14l4 1-1 4m10-14-1 4 4 1"/></symbol>
+<symbol id="i-warm" viewBox="0 0 24 24"><path d="M5 3c5 6-5 12 0 18M12 3c5 6-5 12 0 18M19 3c5 6-5 12 0 18"/></symbol>
+<symbol id="i-volume" viewBox="0 0 24 24"><path d="m11 4-6 5H2v6h3l6 5zM17 12h5"/></symbol>
+<symbol id="i-rest" viewBox="0 0 24 24"><path d="M4 3h13v11a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4zM17 5h4v6h-4M2 22h18"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-8 9 8M5 9v13h5v-7h4v7h5V9"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M3 3h18v14H10l-7 5zM7 7h10M7 11h7"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M5 9a7 7 0 0 1 14 0v7l2 3H3l2-3zM9 22h6"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M8 7H6a5 5 0 0 0 0 10h2m8-10h2a5 5 0 0 1 0 10h-2M7 12h10"/></symbol>
+<symbol id="i-route" viewBox="0 0 24 24"><path d="M6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm12 12a3 3 0 1 0 0 6 3 3 0 0 0 0-6ZM6 9v6h8M14 3h7m-3-3v7"/></symbol>
+</defs></svg>
+<div class="app-shell">
+<header class="topbar"><div><span class="brand">WithME <span class="web-label">WEB</span></span><h1 id="appTitle">케어</h1></div><button id="connectionToggle" class="connection-button"><svg class="icon" aria-hidden="true"><use href="#i-link"/></svg><span id="connectionLabel">연결</span></button></header>
+<main>
+<div class="connection-line"><span id="statusDot" class="status-dot"></span><p id="connection" role="status">차량의 QR 또는 연결 링크를 준비해 주세요.</p></div>
+<p id="message" role="status" aria-live="polite"></p>
+<section class="vehicle-illustration" aria-label="차량 예시"><div class="section-title"><h2>함께 타는 자동차</h2><span>WithME</span></div><img src="/vehicle-showcase.png" alt="흰색 전기 SUV 차량 예시 이미지" width="1536" height="1024"><p>차량 이미지는 예시입니다</p></section>
+<section id="join" class="surface"><h2>차량과 연결</h2><p>차량의 <b>요청 → 동승자 연결</b>에서 QR을 열거나 연결 링크를 복사하세요.</p><label for="joinLink">연결 링크</label><div class="join-input"><input id="joinLink" type="url" placeholder="차량에서 복사한 링크" autocomplete="off"><button id="connect">연결</button></div><p class="small">링크로 차량 상태와 요청 권한을 공유합니다. 함께 이동하는 사람에게만 전달하세요.</p></section>
+<div id="connected" hidden>
+<section class="vehicle-card home-panel" aria-label="차량 상태 요약"><div class="section-title"><h2><svg class="icon" aria-hidden="true"><use href="#i-car"/></svg>차량 상태</h2><span id="mode" class="pill">연결 전</span></div><div class="metrics"><article><span>실내 온도</span><strong id="temperature">—</strong></article><article><span>배터리</span><strong id="battery">—</strong></article></div><progress id="batteryLevel" max="100" value="0" aria-label="차량 배터리 잔량"></progress><p id="closures" class="closure-state">문·창문 상태 확인 중</p></section>
+<section id="quickSection" class="request-tools" hidden><div class="section-title"><h2>빠른 요청</h2><button class="text-button" data-view="request">요청 보기</button></div><p id="climateSummary" class="small">공조 상태 확인 중</p><div class="quick"><button data-climate-delta="-0.5"><svg class="icon" aria-hidden="true"><use href="#i-cool"/></svg>시원하게</button><button data-climate-delta="0.5"><svg class="icon" aria-hidden="true"><use href="#i-warm"/></svg>따뜻하게</button><button data-note="음악 소리를 줄여 주세요"><svg class="icon" aria-hidden="true"><use href="#i-volume"/></svg>음악 줄이기</button><button data-note="다음 안전한 장소에서 쉬고 싶어요"><svg class="icon" aria-hidden="true"><use href="#i-rest"/></svg>휴식 요청</button></div><div class="quick"><button data-climate-power="on">공조 켜기</button><button data-climate-power="off">공조 끄기</button></div><p class="small">온도는 현재 설정에서 0.5°C씩 조절을 요청합니다. 운전자 승인 후 적용돼요.</p></section>
+<section class="surface home-panel journey-card"><h2><svg class="icon" aria-hidden="true"><use href="#i-route"/></svg>이동 정보</h2><strong id="arrival">도착 정보 확인 중</strong><p id="remaining">내비에서 확인한 정보가 있을 때 표시해요.</p><div class="driving-line">실제 주행 <strong id="driving">—</strong></div><progress id="progress" max="100" value="0" hidden aria-label="연결 후 이동 진행률"></progress></section>
+<section id="requestSection" class="surface request-panel"><h2>직접 요청하기</h2><p class="small">운전자가 정차 후 확인합니다.</p><form id="requestForm"><label for="kind">요청 종류</label><select id="kind"><option value="note">한마디 요청</option><option value="destination">목적지 제안</option><option value="waypoint">경유지 제안</option></select><label id="titleLabel" for="title">요청 내용</label><input id="title" maxlength="120" required placeholder="어떤 도움이 필요한가요?"><div id="coordinates" hidden><p class="small">장소의 정확한 좌표를 입력해 주세요.</p><button type="button" id="samplePlace" class="secondary">42dot 선택</button><label for="latitude">위도</label><input id="latitude" type="number" step="any" min="-90" max="90"><label for="longitude">경도</label><input id="longitude" type="number" step="any" min="-180" max="180"></div><button type="submit" id="send">요청 보내기</button></form></section>
+<section id="requestsSection" class="surface request-panel"><h2 id="requestsTitle">요청 내역</h2><p class="small" id="votingHint">가족은 장소 제안에 한 표씩 보탤 수 있어요. 최종 선택은 운전자가 정차 후 합니다.</p><div id="requests"><p>아직 요청이 없어요.</p></div></section>
+<section id="alertSection" class="surface alert-panel" hidden><h2>함께 확인해 주세요</h2><div id="alerts" aria-live="polite"></div><button class="secondary" id="notifications">이 페이지 알림 허용</button><p class="small">페이지가 열려 있고 연결된 동안만 알림을 받아요. 문자·전화·백그라운드 푸시는 지원하지 않습니다.</p></section>
+<section id="noAlerts" class="surface alert-panel"><svg class="empty-icon icon" aria-hidden="true"><use href="#i-bell"/></svg><h2>받은 확인 알림이 없어요</h2><p>차량에서 확인 요청이 오면 여기에 표시해요.</p><p class="small">알림 유무와 관계없이 아이·반려동물을 직접 확인하세요.</p></section>
+<section class="surface connection-panel"><div class="section-title"><h2>연결 관리</h2><span class="role-label" id="role">동승자</span></div><p>연결은 최대 2시간 유지됩니다. 요청과 차량 상태는 서버 메모리에만 보관하며 전체 연결 종료 시 삭제합니다.</p><p class="small">온도·배터리 정보는 차량에서 받은 상태이며 안전을 보장하지 않습니다. 이 페이지의 연결만 해제하면 차량의 공유 세션은 유지됩니다.</p><button class="secondary" id="leave">이 페이지에서 연결 해제</button></section>
+</div>
+<section id="nativeApps" class="surface connection-panel"></section>
+<p class="app-footnote">WithME · 독립 개발 프로토타입 · 웹 동승자 화면</p>
+</main>
+<nav id="bottomNav" aria-label="동승자 메뉴" hidden><button data-view="home" aria-current="page"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg>홈</button><button id="requestNav" data-view="request"><svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>요청</button><button data-view="alerts"><svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg>알림 <i id="alertCount" hidden>0</i></button></nav>
+</div></body></html>

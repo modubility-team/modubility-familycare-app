@@ -1,0 +1,14 @@
+# Windows launchers and PowerShell scripts keep CRLF line endings on every checkout
+*.cmd text eol=crlf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+# The Gradle wrapper shell script must keep LF
+gradlew text eol=lf
+# Binary files
+*.apk binary
+*.aab binary
+*.jar binary
+*.png binary
+*.jpg binary
+*.webp binary
+*.onnx binary

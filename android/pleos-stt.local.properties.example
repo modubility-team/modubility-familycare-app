@@ -1,0 +1,4 @@
+# Optional Pleos Speech HYBRID credentials from your Pleos Playground My Project
+# Without both values, on-device recognition stays active.
+client_id=
+client_secret=

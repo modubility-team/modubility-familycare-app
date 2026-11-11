@@ -1,0 +1,13 @@
+{
+  "asset": "vehicle_showcase.png",
+  "created": "2026-10-27",
+  "method": "Built-in image_gen tool, using the imagegen skill",
+  "kind": "AI-generated illustrative vehicle, not an official manufacturer photo or a registered vehicle model",
+  "display_label": "차량 이미지는 예시입니다",
+  "prompt": "Use case: product-mockup. Asset type: a transparent automotive cutout for a Korean connected-car owner app and family passenger app. Create a highly realistic studio-quality 3D product rendering of one pearl-white modern electric family crossover SUV, a believable original vehicle with normal real-world manufacturing details, not a cartoon or a schematic. Front three-quarter view facing left, seen slightly from above, entire vehicle including all four wheel areas comfortably in frame. Premium silver alloy wheels, black glass roof, dark tinted windows, accurate rubber tires, nuanced pearl-white paint and subtle reflected studio softboxes, physically realistic headlights, mirrors, grille, door handles and body panel seams. The car should occupy most of a landscape canvas with small clear margins. Transparent background with a restrained soft contact shadow. Clean neutral lighting, suitable on white or pale grey app surfaces. No logos, badges, readable plate text, watermark, words, UI, scenery or people. The car must be an original design, not a reproduction of a named production model. It is an illustrative vehicle image, not an official manufacturer asset.",
+  "contest_terms": "https://appdevchallenge.auto-hmg.io/notice/c0a1a000-2026-4923-8000-000000000006",
+  "note": "Generation and absence of a logo are not a legal guarantee of non-infringement. A specific manufacturer's official photo/model should only replace this asset with suitable permission. The native Pleos system vehicle model is provided by the emulator and is not extracted into this project.",
+  "edits": [
+    "2026-11-08: The generator had drawn small emblem-like marks on both wheel center caps despite the no-logo prompt. They were painted over with the surrounding cap colour (about 220 pixels). No other pixel changed."
+  ]
+}

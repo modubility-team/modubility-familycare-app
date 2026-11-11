@@ -1,0 +1,35 @@
+Family Care Windows 팀원 도구 검증 / 2026-10-27
+
+환경: 현재 개발용 Windows PC, Windows PowerShell 5.1, JDK 17, SDK API 35, Pleos 2.1.
+실제 친구 PC를 원격으로 설치·시험한 기록은 아닙니다.
+
+[통과] PowerShell 구문 검사 및 공용 메뉴의 설치 점검
+  Git, JDK 17, Android SDK, Python, Android Studio, Pleos AVD, SDK 구성, WHPX 검사.
+[통과] 기존 사용자 폴더 경로를 실행 도구 소스에 고정하지 않고 탐색/개인 옵션 사용.
+[통과] 원본과 다른 경로의 별도 소스 사본에서 개인 설정으로 환경 발견.
+  이 실행의 JAVA_HOME/ANDROID_HOME/ANDROID_SDK_ROOT를 비운 상태에서 점검.
+[통과] 별도 소스 사본의 local.properties 자동 생성 및 세 앱 새 빌드.
+[통과] exportDebugApks로 세 APK를 저장소 dist/apk에 모음.
+[통과] 공용 Test 메뉴: 차량 단위 24개 + 스마트폰 3개씩 + Python 서버 8개 = 38개.
+[통과] 공용 Emulator 메뉴: Pleos cold boot, 준비 상태 확인, Virtual Console 포트 연결.
+[통과] Clone 도구가 이미 존재하는 대상 폴더를 거부하고 기존 파일을 보존.
+[통과] Clone 도구로 실제 GitHub 저장소를 새 검증 폴더에 내려받음 (현재 계정 권한 기준).
+[통과] Car 메뉴로 세 APK 빌드 후 Pleos의 현재 사용자에 차량 앱 설치·실행.
+[통과] Relay 메뉴로 Python 서버 실행 및 /health 응답 확인.
+[통과] 서버 메뉴는 Pleos가 없을 때 명확한 오류로 중단.
+
+발견·수정:
+- PowerShell 5.1에서 ADB 시작 안내(stderr)를 실패로 오인하던 처리 수정.
+- PowerShell 자동 변수 Matches와 기기 목록 변수 이름 충돌 수정.
+- Test 메뉴의 여러 Gradle 작업을 하나의 배열 인자로 명시 전달.
+
+APK의 앱 기능 검증은 THREE-PRODUCT-TESTS.txt의 0.4.0 결과를 참고합니다.
+친구의 GitHub 인증/초대, 설치 권한, GPU·가상화, Wi-Fi/방화벽, 실제 휴대폰은 친구 PC에서 확인해야 합니다.
+약관 수락·BIOS·Windows 기능·방화벽 규칙은 실행 도구가 자동 변경하지 않습니다.
+
+2026-10-27 날짜·시간 보완
+[통과] Emulator 실행 시 한국 시간대(Asia/Seoul), Android 자동 시각 동기화 적용.
+[통과] 현재 실행 중인 Pleos에서 PC와의 UTC 차이 1초, 한국 날짜 및 상단 시계 표시 확인.
+[통과] Sync-PleosClock.ps1의 Windows PowerShell 구문 검사.
+에뮬레이터 신규 실행에도 -timezone Asia/Seoul을 지정합니다.
+실물 휴대폰/실차는 변경하지 않으며 날짜 고정값을 넣지 않습니다. 자세한 안내: TIME-SYNC.txt.

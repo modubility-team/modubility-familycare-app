@@ -1,0 +1,33 @@
+﻿패밀리케어앱 · Windows 설치 요약 (GitHub 저장소용)
+팀 모두빌리티 · 2026-11-08
+
+이 저장소에는 API 키, 빌드 결과(dist), 서명 키가 들어 있지 않습니다.
+단계별 자세한 안내와 문제 해결은 docs\RUN-GUIDE-0.20.5.txt 를 보세요. 이 문서는 요약입니다.
+
+1. 코드 받기
+   git clone <저장소 주소> 또는 GitHub의 Code → Download ZIP → 압축 풀기
+   예: C:\FamilyCare\modubility-familycare-app (OneDrive 동기화 폴더는 피하기)
+
+2. 프로그램 설치 (처음 한 번)
+   Android Studio, Temurin JDK 17, Git
+   Python 3.12: python.org의 Python 3.12.10 Windows installer (64-bit) → Add python.exe to PATH 체크 → Install Now
+   SDK Manager: Android 15 (API 35), Build-Tools 35.0.0, Platform-Tools, Emulator, Command-line Tools
+   Pleos 차량 이미지: SDK Update Sites에
+     https://nexus-playground.pleos.ai/repository/raw-releases/connect-avd/2.x/crp-sys-img.xml 추가
+     → API 34 Pleos Connect system image 설치
+     → Device Manager에서 AVD 'FamilyCare_Pleos' (Pleos Connect v2.1.0, Cold boot, RAM 4 GB)
+
+3. TMAP 앱 키 (지도·검색·경로에 필요)
+   tmap.local.example.json 을 같은 폴더에 tmap.local.json 으로 복사 → "app_key"에 키 입력,
+   "enabled": true, "map_sdk_enabled": true
+   팀원은 팀 비공개 전달본의 tmap.local.json을 복사해도 됩니다. 이 파일은 Git에 올리지 않습니다.
+
+4. 01_FirstSetup.cmd → 'Setup complete' 확인 (처음엔 10~30분)
+5. 02_StartDemo.cmd → 시연 보조 화면 http://127.0.0.1:8770/ → 휴대폰 QR 연결
+6. 끝낼 때 03_StopAll.cmd
+한 번에: 00_한번에켜기.cmd가 4(필요할 때만)·5와 에뮬레이터 마이크 연결을 이어서 합니다.
+         처음 실행하면 바탕화면에 '패밀리케어앱 시연 켜기/끄기' 버튼이 생깁니다.
+
+개발자 메뉴: 05_DeveloperMenu.cmd (FamilyCare.cmd와 같음)
+제출용 APK: 07_CreateReleaseKey.cmd (팀에서 한 번) → 08_BuildReleaseApk.cmd. 자세히 docs\RELEASE.md
+협업 방법: docs\TEAMWORK.md
